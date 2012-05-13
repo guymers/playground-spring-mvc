@@ -1,0 +1,8 @@
+CREATE SCHEMA testing;
+
+CREATE TABLE testing.widget (
+	widget_id INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1) PRIMARY KEY,
+	name VARCHAR(50),
+	create_date DATE,
+	active BOOLEAN
+);
