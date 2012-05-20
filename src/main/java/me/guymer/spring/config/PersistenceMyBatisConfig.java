@@ -62,8 +62,8 @@ public class PersistenceMyBatisConfig {
 	}
 	
 	private SqlSessionFactory getSqlSessionFactory() throws Exception {
-        return sqlSessionFactoryBean().getObject();
-    }
+		return sqlSessionFactoryBean().getObject();
+	}
 	
 	//@Bean
 	public SqlSessionFactoryBean sqlSessionFactoryBean() throws Exception {

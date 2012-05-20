@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class PersistenceJPAConfig {
 	
- 	@Value("${config.domainPackageToScan}")
+	@Value("${config.domainPackageToScan}")
 	private String domainPackageToScan;
 	
 	@Value("${jpa.propertiesFileLocation}")
@@ -36,46 +36,46 @@ public class PersistenceJPAConfig {
 	private DataSource dataSource;
 	
 	private EntityManagerFactory entityManagerFactory() throws IOException {
-    	return entityManagerFactoryBean().getObject();
-    }
+		return entityManagerFactoryBean().getObject();
+	}
 	
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws IOException {
-    	final Properties jpaProperties = jpaProperties();
-    	
-    	final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-    	entityManagerFactoryBean.setDataSource(dataSource);
-    	entityManagerFactoryBean.setPackagesToScan(domainPackageToScan);
-    	entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
-    	entityManagerFactoryBean.setJpaProperties(jpaProperties);
-
-        return entityManagerFactoryBean;
-    }
-    
-    private Properties jpaProperties() throws IOException {
-    	final Resource location = new ClassPathResource(propertiesFileLocation);
-    	
-    	final Properties jpaProperties = new Properties();
-    	jpaProperties.load(location.getInputStream());
-    	
-    	return jpaProperties;
-    }
-    
-    @Bean
-    public JpaTransactionManager transactionManager() throws Exception {
-    	final EntityManagerFactory emf = entityManagerFactory();
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws IOException {
+		final Properties jpaProperties = jpaProperties();
 		
-        final JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emf);
+		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+		entityManagerFactoryBean.setDataSource(dataSource);
+		entityManagerFactoryBean.setPackagesToScan(domainPackageToScan);
+		entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
+		entityManagerFactoryBean.setJpaProperties(jpaProperties);
+		
+		return entityManagerFactoryBean;
+	}
+	
+	private Properties jpaProperties() throws IOException {
+		final Resource location = new ClassPathResource(propertiesFileLocation);
+		
+		final Properties jpaProperties = new Properties();
+		jpaProperties.load(location.getInputStream());
+		
+		return jpaProperties;
+	}
+	
+	@Bean
+	public JpaTransactionManager transactionManager() throws Exception {
+		final EntityManagerFactory emf = entityManagerFactory();
+		
+		final JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
+		
+		return transactionManager;
+	}
+	
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		final PersistenceExceptionTranslationPostProcessor exceptionTranslation = new PersistenceExceptionTranslationPostProcessor();
+		
+		return exceptionTranslation;
+	}
 
-        return transactionManager;
-    }
-    
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-    	final PersistenceExceptionTranslationPostProcessor exceptionTranslation = new PersistenceExceptionTranslationPostProcessor();
-    	
-    	return exceptionTranslation;
-    }
-    
 }

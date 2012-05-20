@@ -6,11 +6,11 @@ import org.springframework.core.env.ConfigurableEnvironment;
 
 public class MyApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-    @Override
-    public void initialize(ConfigurableApplicationContext context) {
-        ConfigurableEnvironment env = context.getEnvironment();
-        env.setActiveProfiles("dev", "mybatis");
-        //env.setActiveProfiles("dev", "jpa");
-    }
+	@Override
+	public void initialize(ConfigurableApplicationContext context) {
+		ConfigurableEnvironment env = context.getEnvironment();
+		env.setActiveProfiles("dev", "mybatis");
+		//env.setActiveProfiles("dev", "jpa");
+	}
 
 }
