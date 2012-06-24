@@ -91,10 +91,10 @@
 		
 		<!-- JSON -->
 		<dependency>
-   			<groupId>org.codehaus.jackson</groupId>
-   			<artifactId>jackson-mapper-asl</artifactId>
-   			<version>1.9.6</version>
-  		</dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.6</version>
+		</dependency>
 		
 		<!-- Other -->
 		<dependency>
@@ -184,7 +184,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

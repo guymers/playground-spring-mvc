@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="me.guymer.spring.mybatis.persistence.WidgetMapper">
 	
-    <select id="getAll" resultType="Widget">
-        SELECT
-        	widget_id AS id,
-        	name,
-        	create_date,
-        	active
-        FROM ${schema}.widget
-        WHERE active = true
-    </select>
-    
-    <select id="get" resultType="Widget">
-        SELECT
-        	widget_id AS id,
-        	name,
-        	create_date,
-        	active
-        FROM ${schema}.widget
-        WHERE widget_id = ${id}
-    </select>
-    
-    <insert id="create" parameterType="Widget" keyProperty="id">
-        INSERT INTO ${schema}.widget
-        (name, create_date, active)
-        VALUES
-        (#{name}, #{createDate}, #{active})
-    </insert>
-    
-    <update id="update" parameterType="Widget">
-        UPDATE ${schema}.widget
-        SET
-        	name = #{name},
-        	create_date = #{createDate},
-        	active = #{active}
-        WHERE widget_id = #{id}
-    </update>
-    
-    <delete id="delete" parameterType="Widget">
-        DELETE FROM ${schema}.widget
-        WHERE widget_id = #{id}
-    </delete>
+	<select id="getAll" resultType="Widget">
+		SELECT
+			widget_id AS id,
+			name,
+			create_date,
+			active
+		FROM ${schema}.widget
+		WHERE active = true
+	</select>
+	
+	<select id="get" resultType="Widget">
+		SELECT
+			widget_id AS id,
+			name,
+			create_date,
+			active
+		FROM ${schema}.widget
+		WHERE widget_id = ${id}
+	</select>
+	
+	<insert id="create" parameterType="Widget" keyProperty="id">
+		INSERT INTO ${schema}.widget
+		(name, create_date, active)
+		VALUES
+		(#{name}, #{createDate}, #{active})
+	</insert>
+	
+	<update id="update" parameterType="Widget">
+		UPDATE ${schema}.widget
+		SET
+			name = #{name},
+			create_date = #{createDate},
+			active = #{active}
+		WHERE widget_id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="Widget">
+		DELETE FROM ${schema}.widget
+		WHERE widget_id = #{id}
+	</delete>
 	
 </mapper>
