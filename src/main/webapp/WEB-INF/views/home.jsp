@@ -6,8 +6,10 @@
 		<title>Home</title>
 	</head>
 	<body>
-		<h1>Hello world!</h1>
+		<h1>Home</h1>
 		
-		<p>The time on the server is ${serverTime}.</p>
+		<a href="<c:url value="/mybatis/widgets"/>">MyBatis</a>
+		<br/>
+		<a href="<c:url value="/jpa/widgets"/>">JPA</a>
 	</body>
 </html>

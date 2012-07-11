@@ -13,9 +13,9 @@ import javax.persistence.criteria.Root;
 public abstract class AbstractRepository<T extends Serializable> {
 	
 	@PersistenceContext
-	EntityManager entityManager;
+	protected EntityManager entityManager;
 	
-	private Class<T> clazz;
+	private final Class<T> clazz;
 	
 	public AbstractRepository(Class<T> clazz) {
 		this.clazz = clazz;
@@ -26,13 +26,13 @@ public abstract class AbstractRepository<T extends Serializable> {
 	}
 	
 	public List<T> getAll() {
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<T> cq = cb.createQuery(clazz);
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(clazz);
 		
-		Root<T> root = cq.from(clazz);
-		cq.select(root);
+		Root<T> root = criteriaQuery.from(clazz);
+		criteriaQuery.select(root);
 		
-		TypedQuery<T> query = entityManager.createQuery(cq); 
+		TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
 		
 		return query.getResultList();
 	}
@@ -51,5 +51,5 @@ public abstract class AbstractRepository<T extends Serializable> {
 		
 		entityManager.remove(newEntity);
 	}
-
+	
 }

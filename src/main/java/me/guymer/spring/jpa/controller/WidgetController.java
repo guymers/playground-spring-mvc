@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+@Controller("jpaWidgetController")
 @RequestMapping(value = "/jpa/widget")
 public class WidgetController {
 
-	private static final Logger logger = LoggerFactory.getLogger(WidgetController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(WidgetController.class);
 	
 	@Inject
-	private WidgetService widgetService;
+	private WidgetService jpaWidgetService;
 	
 	@RequestMapping(value = "widgets", method = RequestMethod.GET)
 	public String widget(Model model) {
@@ -33,45 +33,45 @@ public class WidgetController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody List<Widget> list() {
-		List<Widget> widgets = widgetService.get();
+		List<Widget> widgets = jpaWidgetService.get();
 		
 		return widgets;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Widget get(@PathVariable("id") int id) {
-		Widget widget = widgetService.get(id);
+	public @ResponseBody Widget get(@PathVariable int id) {
+		Widget widget = jpaWidgetService.get(id);
 		
-		logger.info("retrieved {}", widget);
+		LOGGER.info("retrieved {}", widget);
 		
 		return widget;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody Widget create(@RequestBody Widget widget) {
-		widgetService.create(widget);
+		jpaWidgetService.create(widget);
 		
-		logger.info("created {}", widget);
+		LOGGER.info("created {}", widget);
 		
 		return widget;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public @ResponseBody Widget update(@PathVariable("id") int id, @RequestBody Widget widget) {
+	public @ResponseBody Widget update(@PathVariable int id, @RequestBody Widget widget) {
 		widget.setId(id);
-		widgetService.update(widget);
+		jpaWidgetService.update(widget);
 		
-		logger.info("updated {}", widget);
+		LOGGER.info("updated {}", widget);
 		
 		return widget;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public @ResponseBody Widget delete(@PathVariable("id") int id, @RequestBody Widget widget) {
+	public @ResponseBody Widget delete(@PathVariable int id, @RequestBody Widget widget) {
 		widget.setId(id);
-		widgetService.delete(widget);
+		jpaWidgetService.delete(widget);
 		
-		logger.info("deleted {}", widget);
+		LOGGER.info("deleted {}", widget);
 		
 		return widget;
 	}

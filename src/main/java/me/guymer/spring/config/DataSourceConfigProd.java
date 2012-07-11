@@ -28,6 +28,7 @@ public class DataSourceConfigProd implements DataSourceConfig {
 	private String password;
 	
 	@Bean
+	@Override
 	public DataSource dataSource() {
 		final BoneCPDataSource dataSource = new BoneCPDataSource();
 		dataSource.setDriverClass(driver);

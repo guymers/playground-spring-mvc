@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Service;
-
 import me.guymer.spring.mybatis.domain.Widget;
 import me.guymer.spring.mybatis.persistence.WidgetMapper;
 
-@Service
+import org.springframework.stereotype.Service;
+
+@Service("mybatisWidgetService")
 public class WidgetService {
 
 	@Inject

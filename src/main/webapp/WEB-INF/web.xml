@@ -11,7 +11,7 @@
 	
 	<context-param>
 		<param-name>contextInitializerClasses</param-name>
-		<param-value>me.guymer.spring.config.MyApplicationContextInitializer</param-value>
+		<param-value>me.guymer.spring.MyApplicationContextInitializer</param-value>
 	</context-param>
 	
 	<listener>

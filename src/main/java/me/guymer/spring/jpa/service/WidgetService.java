@@ -10,7 +10,7 @@ import me.guymer.spring.jpa.persistence.WidgetRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service("jpaWidgetService")
 public class WidgetService {
 	
 	@Inject

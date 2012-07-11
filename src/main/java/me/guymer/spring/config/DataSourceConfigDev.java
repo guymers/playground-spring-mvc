@@ -13,6 +13,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 public class DataSourceConfigDev implements DataSourceConfig {
 	
 	@Bean
+	@Override
 	public DataSource dataSource() {
 		final EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
 		embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.HSQL);

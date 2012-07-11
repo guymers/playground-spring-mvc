@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class WidgetRepository extends AbstractRepository<Widget> {
-
+	
 	public WidgetRepository() {
 		super(Widget.class);
 	}
