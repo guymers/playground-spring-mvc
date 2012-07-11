@@ -1,5 +1,1 @@
-JPA and MyBatis repository implementations
-
-Choose which one to use in me.guymer.spring.config.MyApplicationContextInitializer.java
-
-Then browse to /spring-mvc/jpa/widgets or /spring-mvc/mybatis/widgets depending on what implementation is being used
+JPA and MyBatis persistence setups
