@@ -42,6 +42,6 @@ public class Widget implements Serializable {
 	}
 	
 	public void setCreateDate(Date createDate) {
-		this.createDate = new Date(createDate.getTime());
+		this.createDate = createDate == null ? null : new Date(createDate.getTime());
 	}
 }
