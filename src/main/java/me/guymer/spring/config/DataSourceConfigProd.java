@@ -12,7 +12,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
 
 @Configuration
 @Profile("prod")
-@PropertySource("classpath:properties/database.properties")
+@PropertySource("classpath:properties/database.prod.properties")
 public class DataSourceConfigProd implements DataSourceConfig {
 	
 	@Value("${database.driver}")
@@ -38,4 +38,5 @@ public class DataSourceConfigProd implements DataSourceConfig {
 		
 		return dataSource;
 	}
+	
 }

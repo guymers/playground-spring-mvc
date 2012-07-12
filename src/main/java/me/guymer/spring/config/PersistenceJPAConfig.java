@@ -18,11 +18,16 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @Configuration
 public class PersistenceJPAConfig {
 	
+	private static final String HIBERNATE_DIALECT = "hibernate.dialect";
+	
 	@Value("${jpa.domainPackageToScan}")
 	private String jpaDomainPackageToScan;
 	
 	@Value("${jpa.propertiesFileLocation}")
 	private String propertiesFileLocation;
+	
+	@Value("${" + HIBERNATE_DIALECT + "}")
+	private String hibernateDialect;
 	
 	@Inject
 	private DataSource dataSource;
@@ -33,10 +38,12 @@ public class PersistenceJPAConfig {
 		entityManagerFactoryBean.setDataSource(dataSource);
 		
 		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+		
 		entityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
 		entityManagerFactoryBean.setPackagesToScan(jpaDomainPackageToScan);
 		
 		final Properties jpaProperties = jpaProperties();
+		jpaProperties.setProperty(HIBERNATE_DIALECT, hibernateDialect);
 		entityManagerFactoryBean.setJpaProperties(jpaProperties);
 		
 		return entityManagerFactoryBean;
