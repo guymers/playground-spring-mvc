@@ -10,4 +10,16 @@ public class Widget {
 	private String name;
 	private Date createDate;
 	private boolean active;
+	
+	public Date getCreateDate() {
+		if (createDate == null) {
+			return null;
+		}
+		
+		return new Date(createDate.getTime());
+	}
+	
+	public void setCreateDate(Date createDate) {
+		this.createDate = new Date(createDate.getTime());
+	}
 }
