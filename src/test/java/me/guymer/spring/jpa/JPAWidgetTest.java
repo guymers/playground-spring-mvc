@@ -4,8 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import me.guymer.spring.jpa.domain.Widget;
 import me.guymer.spring.jpa.persistence.WidgetRepository;
@@ -30,9 +28,6 @@ public class JPAWidgetTest {
 	@Configuration
 	@ComponentScan(basePackages = "me.guymer.spring", excludeFilters = @ComponentScan.Filter({ComponentScan.class, EnableWebMvc.class}))
 	static class ContextConfiguration {}
-	
-	@PersistenceContext
-	private EntityManager entityManager;
 	
 	@Inject
 	private WidgetRepository widgetRepository;
