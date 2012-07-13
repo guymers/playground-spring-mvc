@@ -20,7 +20,7 @@ public class Widget implements Serializable {
 	private static final long serialVersionUID = -3739549762565393073L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "widget_id")
 	private int id;
 	
