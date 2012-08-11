@@ -58,6 +58,8 @@ public class WidgetController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public @ResponseBody Widget update(@PathVariable int id, @RequestBody Widget widget) {
+		LOGGER.info("update {}-{}", id, widget);
+		
 		widget.setId(id);
 		jpaWidgetService.update(widget);
 		

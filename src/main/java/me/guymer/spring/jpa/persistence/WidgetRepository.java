@@ -8,7 +8,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import me.guymer.spring.jpa.domain.Widget;
-import me.guymer.spring.jpa.domain.Widget_;
 
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +26,7 @@ public class WidgetRepository extends AbstractRepository<Widget> {
 		Root<Widget> widget = criteriaQuery.from(Widget.class);
 		
 		criteriaQuery.select(widget);
-		criteriaQuery.where(criteriaBuilder.isTrue(widget.get(Widget_.active)));
+		criteriaQuery.where(criteriaBuilder.isTrue(widget.<Boolean>get("active")));
 		
 		TypedQuery<Widget> query = entityManager.createQuery(criteriaQuery);
 		
