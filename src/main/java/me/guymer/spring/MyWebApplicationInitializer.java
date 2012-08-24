@@ -20,6 +20,9 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
 		XmlWebApplicationContext appContext = new XmlWebApplicationContext();
 		appContext.setConfigLocation("/WEB-INF/spring/servlet-context.xml");
 		
+		//AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+		//context.register(Config.class);
+		
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("appServlet", new DispatcherServlet(appContext));
 		dispatcher.setLoadOnStartup(0);
 		dispatcher.addMapping("/");
