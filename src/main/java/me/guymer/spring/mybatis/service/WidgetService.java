@@ -8,6 +8,7 @@ import me.guymer.spring.mybatis.domain.Widget;
 import me.guymer.spring.mybatis.persistence.WidgetMapper;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("mybatisWidgetService")
 public class WidgetService {
@@ -24,18 +25,33 @@ public class WidgetService {
 	}
 	
 	public Widget get(Widget widget) {
-		return get(widget.getId());
+		int id = widget.getId();
+		
+		return get(id);
 	}
 	
+	@Transactional
 	public void create(Widget widget) {
 		widgetMapper.create(widget);
 	}
 	
+	@Transactional
 	public void update(Widget widget) {
 		widgetMapper.update(widget);
 	}
-
+	
+	@Transactional
 	public void delete(Widget widget) {
 		widgetMapper.delete(widget);
 	}
+	
+	@Transactional
+	public void createOrUpdate(Widget widget) {
+		if (widget.getId() > 0) {
+			update(widget);
+		} else {
+			create(widget);
+		}
+	}
+	
 }

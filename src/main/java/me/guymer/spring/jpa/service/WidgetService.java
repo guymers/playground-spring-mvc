@@ -39,9 +39,19 @@ public class WidgetService {
 	public void update(Widget widget) {
 		widgetRepository.update(widget);
 	}
-
+	
 	@Transactional
 	public void delete(Widget widget) {
 		widgetRepository.delete(widget);
 	}
+	
+	@Transactional
+	public void createOrUpdate(Widget widget) {
+		if (widget.getId() > 0) {
+			update(widget);
+		} else {
+			create(widget);
+		}
+	}
+	
 }

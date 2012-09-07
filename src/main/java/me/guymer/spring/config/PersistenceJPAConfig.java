@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
@@ -33,18 +33,18 @@ public class PersistenceJPAConfig {
 	private DataSource dataSource;
 	
 	@Bean
+	public JpaVendorAdapter jpaVendorAdapter() {
+		return new HibernateJpaVendorAdapter();
+	}
+	
+	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws IOException {
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource);
 		
-		HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-		
-		entityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
+		entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
 		entityManagerFactoryBean.setPackagesToScan(jpaDomainPackageToScan);
-		
-		final Properties jpaProperties = jpaProperties();
-		jpaProperties.setProperty(HIBERNATE_DIALECT, hibernateDialect);
-		entityManagerFactoryBean.setJpaProperties(jpaProperties);
+		entityManagerFactoryBean.setJpaProperties(jpaProperties());
 		
 		return entityManagerFactoryBean;
 	}
@@ -55,14 +55,9 @@ public class PersistenceJPAConfig {
 		final Properties jpaProperties = new Properties();
 		jpaProperties.load(location.getInputStream());
 		
+		jpaProperties.setProperty(HIBERNATE_DIALECT, hibernateDialect);
+		
 		return jpaProperties;
 	}
 	
-	@Bean
-	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-		final PersistenceExceptionTranslationPostProcessor exceptionTranslation = new PersistenceExceptionTranslationPostProcessor();
-		
-		return exceptionTranslation;
-	}
-
 }

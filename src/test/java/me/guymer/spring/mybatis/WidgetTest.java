@@ -1,12 +1,12 @@
 package me.guymer.spring.mybatis;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.inject.Inject;
 
+import junit.framework.Assert;
 import me.guymer.spring.mybatis.domain.Widget;
-import me.guymer.spring.mybatis.persistence.WidgetMapper;
+import me.guymer.spring.mybatis.service.WidgetService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles("test")
+@Transactional
 public class WidgetTest {
 	
 	@Configuration
@@ -30,21 +31,47 @@ public class WidgetTest {
 	static class ContextConfiguration {}
 	
 	@Inject
-	private WidgetMapper widgetMapper;
+	private WidgetService widgetService;
 	
 	@Test(expected = MyBatisSystemException.class)
-	@Transactional
 	public void testSqlError() {
 		String nameToLong = "012345678901234567890123456789012345678901234567890";
-		Calendar calendar = Calendar.getInstance();
-		Date now = calendar.getTime();
 		
-		Widget widget2 = new Widget();
-		widget2.setName(nameToLong);
-		widget2.setCreateDate(now);
-		widget2.setActive(true);
+		Widget widget = new Widget();
+		widget.setName(nameToLong);
+		widget.setCreateDate(new Date());
+		widget.setActive(true);
 		
-		widgetMapper.create(widget2);
+		widgetService.create(widget);
+	}
+	
+	@Test
+	public void testCreateOrUpdateCreate() {
+		Assert.assertEquals(5, widgetService.get().size());
+		
+		Widget widget = new Widget();
+		widget.setName("name");
+		widget.setCreateDate(new Date());
+		widget.setActive(true);
+		
+		widgetService.createOrUpdate(widget);
+		
+		Assert.assertEquals(6, widgetService.get().size());
+	}
+	
+	@Test
+	public void testCreateOrUpdateUpdate() {
+		Widget existing = widgetService.get(1);
+		
+		Assert.assertEquals("Test 1", existing.getName());
+		
+		existing.setName("blah");
+		
+		widgetService.createOrUpdate(existing);
+		
+		Widget existing2 = widgetService.get(1);
+		
+		Assert.assertEquals("blah", existing2.getName());
 	}
 	
 }

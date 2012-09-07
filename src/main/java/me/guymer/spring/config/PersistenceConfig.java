@@ -3,13 +3,18 @@ package me.guymer.spring.config;
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.EnableSpringConfigured;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement
+@EnableSpringConfigured
+@EnableAspectJAutoProxy
+@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 public class PersistenceConfig {
 	
 	@Inject

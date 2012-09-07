@@ -24,7 +24,7 @@ public class WidgetController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WidgetController.class);
 	
 	@Inject
-	private WidgetService jpaWidgetService;
+	private WidgetService widgetService;
 	
 	@RequestMapping(value = "widgets", method = RequestMethod.GET)
 	public String widget(Model model) {
@@ -33,14 +33,14 @@ public class WidgetController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody List<Widget> list() {
-		List<Widget> widgets = jpaWidgetService.get();
+		List<Widget> widgets = widgetService.get();
 		
 		return widgets;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody Widget get(@PathVariable int id) {
-		Widget widget = jpaWidgetService.get(id);
+		Widget widget = widgetService.get(id);
 		
 		LOGGER.info("retrieved {}", widget);
 		
@@ -49,7 +49,7 @@ public class WidgetController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody Widget create(@RequestBody Widget widget) {
-		jpaWidgetService.create(widget);
+		widgetService.create(widget);
 		
 		LOGGER.info("created {}", widget);
 		
@@ -58,10 +58,8 @@ public class WidgetController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public @ResponseBody Widget update(@PathVariable int id, @RequestBody Widget widget) {
-		LOGGER.info("update {}-{}", id, widget);
-		
 		widget.setId(id);
-		jpaWidgetService.update(widget);
+		widgetService.update(widget);
 		
 		LOGGER.info("updated {}", widget);
 		
@@ -71,7 +69,7 @@ public class WidgetController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody Widget delete(@PathVariable int id, @RequestBody Widget widget) {
 		widget.setId(id);
-		jpaWidgetService.delete(widget);
+		widgetService.delete(widget);
 		
 		LOGGER.info("deleted {}", widget);
 		
