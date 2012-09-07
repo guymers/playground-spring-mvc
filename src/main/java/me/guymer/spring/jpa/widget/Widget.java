@@ -1,4 +1,4 @@
-package me.guymer.spring.jpa.domain;
+package me.guymer.spring.jpa.widget;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package me.guymer.spring.jpa.persistence;
+package me.guymer.spring.jpa.widget;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import me.guymer.spring.jpa.domain.Widget;
+import me.guymer.spring.jpa.persistence.AbstractRepository;
 
 import org.springframework.stereotype.Repository;
 

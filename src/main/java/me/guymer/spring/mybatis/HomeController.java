@@ -1,4 +1,4 @@
-package me.guymer.spring.mybatis.controller;
+package me.guymer.spring.mybatis;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

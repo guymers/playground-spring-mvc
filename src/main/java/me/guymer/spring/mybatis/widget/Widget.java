@@ -1,4 +1,4 @@
-package me.guymer.spring.mybatis.domain;
+package me.guymer.spring.mybatis.widget;
 
 import java.util.Date;
 

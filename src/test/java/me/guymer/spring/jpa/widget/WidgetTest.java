@@ -1,18 +1,17 @@
-package me.guymer.spring.mybatis;
+package me.guymer.spring.jpa.widget;
 
 import java.util.Date;
 
 import javax.inject.Inject;
 
 import junit.framework.Assert;
-import me.guymer.spring.mybatis.domain.Widget;
-import me.guymer.spring.mybatis.service.WidgetService;
+import me.guymer.spring.jpa.widget.Widget;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,7 +32,7 @@ public class WidgetTest {
 	@Inject
 	private WidgetService widgetService;
 	
-	@Test(expected = MyBatisSystemException.class)
+	@Test(expected = DataIntegrityViolationException.class)
 	public void testSqlError() {
 		String nameToLong = "012345678901234567890123456789012345678901234567890";
 		

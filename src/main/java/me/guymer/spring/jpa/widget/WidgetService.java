@@ -1,11 +1,9 @@
-package me.guymer.spring.jpa.service;
+package me.guymer.spring.jpa.widget;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import me.guymer.spring.jpa.domain.Widget;
-import me.guymer.spring.jpa.persistence.WidgetRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

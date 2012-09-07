@@ -14,9 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-
 @Configuration
-@EnableMyBatisMapperScanner(basePackage = "me.guymer.spring.mybatis.persistence")
+@EnableMyBatisMapperScanner(basePackage = "me.guymer.spring.mybatis")
 public class PersistenceMyBatisConfig {
 	
 	@Value("${config.schema}")

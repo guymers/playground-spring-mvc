@@ -1,8 +1,6 @@
-package me.guymer.spring.mybatis.persistence;
+package me.guymer.spring.mybatis.widget;
 
 import java.util.List;
-
-import me.guymer.spring.mybatis.domain.Widget;
 
 import org.apache.ibatis.annotations.Param;
 

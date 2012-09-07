@@ -1,4 +1,4 @@
-package me.guymer.spring.jpa.controller;
+package me.guymer.spring.jpa;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

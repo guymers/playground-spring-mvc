@@ -1,11 +1,8 @@
-package me.guymer.spring.mybatis.service;
+package me.guymer.spring.mybatis.widget;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import me.guymer.spring.mybatis.domain.Widget;
-import me.guymer.spring.mybatis.persistence.WidgetMapper;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

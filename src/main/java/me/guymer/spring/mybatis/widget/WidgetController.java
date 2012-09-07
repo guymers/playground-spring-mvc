@@ -1,11 +1,8 @@
-package me.guymer.spring.jpa.controller;
+package me.guymer.spring.mybatis.widget;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import me.guymer.spring.jpa.domain.Widget;
-import me.guymer.spring.jpa.service.WidgetService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller("jpaWidgetController")
-@RequestMapping(value = "/jpa/widget")
+@Controller("mybatisWidgetController")
+@RequestMapping(value = "/mybatis/widget")
 public class WidgetController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(WidgetController.class);
