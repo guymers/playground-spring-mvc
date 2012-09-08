@@ -30,7 +30,7 @@
 						{
 							name: 'id',
 							type: 'int',
-							seNull: true
+							useNull: true
 						},
 						{
 							name: 'name',
@@ -78,7 +78,9 @@
 						type: 'rest',
 						url: 'widget',
 						reader: {
-							type: 'json'
+							type: 'json',
+							root: 'data',
+							messageProperty: 'message'
 						},
 						writer: {
 							type: 'json'
@@ -92,7 +94,8 @@
 					]
 				});
 				
-				store.getProxy().on('exception', function(proxy, response, operation, e) {
+				var proxy = store.getProxy();
+				proxy.on('exception', function(proxy, response, operation, e) {
 					switch (operation.action) {
 						case 'create':
 						case 'update':

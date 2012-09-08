@@ -1,4 +1,4 @@
-package me.guymer.spring.controller;
+package me.guymer.spring.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
