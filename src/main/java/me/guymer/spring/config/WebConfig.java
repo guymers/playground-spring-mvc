@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
@@ -59,6 +60,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		internalResourceViewResolver.setSuffix(".jsp");
 		
 		return internalResourceViewResolver;
+	}
+	
+	// seems to be required for @ControllerAdvice to work
+	@Bean
+	public ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver() {
+		return new ExceptionHandlerExceptionResolver();
 	}
 	
 }

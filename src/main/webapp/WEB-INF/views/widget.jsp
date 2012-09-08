@@ -19,6 +19,11 @@
 			]);
 			
 			Ext.onReady(function() {
+				// http://www.sencha.com/forum/showthread.php?176637-Ext.data.writer.Json-no-longer-respects-dateFormat
+				Ext.JSON.encodeDate = function(date) {
+					return Ext.Date.format(date, '"Y-m-d H:i:s"');
+				};
+				
 				Ext.tip.QuickTipManager.init();
 				
 				var me = this;
@@ -40,7 +45,7 @@
 						{
 							name: 'createDate',
 							type: 'date',
-							dateFormat: 'time',
+							dateFormat: 'Y-m-d H:i:s',
 							useNull: true
 						},
 						{
@@ -104,7 +109,16 @@
 							break;
 					}
 					
-					Ext.Msg.alert('Error', response.statusText);
+					var message;
+					
+					try {
+						var json = Ext.decode(response.responseText);
+						message = json.message;
+					} catch(e) {
+						message = response.statusText;
+					}
+					
+					Ext.Msg.alert('Error', message);
 				}, store);
 				
 				var rowEditing = Ext.create('Ext.grid.plugin.RowEditing');
