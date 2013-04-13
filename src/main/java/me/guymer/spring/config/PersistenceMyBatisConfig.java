@@ -5,9 +5,8 @@ import java.util.Properties;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
-import me.guymer.spring.config.mybatis.EnableMyBatisMapperScanner;
-
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 @Configuration
-@EnableMyBatisMapperScanner(basePackage = "me.guymer.spring.mybatis")
+@MapperScan("me.guymer.spring.mybatis")
 public class PersistenceMyBatisConfig {
 	
 	@Value("${config.schema}")
@@ -46,13 +45,5 @@ public class PersistenceMyBatisConfig {
 		
 		return sqlSessionFactoryBean;
 	}
-	
-	/*@Bean
-	public MapperScannerConfigurer mapperScannerConfigurer() {
-		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-		mapperScannerConfigurer.setBasePackage("me.guymer.spring");
-		
-		return mapperScannerConfigurer;
-	}*/
 	
 }
