@@ -9,7 +9,8 @@ public class MyApplicationContextInitializer implements ApplicationContextInitia
 	@Override
 	public void initialize(ConfigurableApplicationContext context) {
 		ConfigurableEnvironment env = context.getEnvironment();
-		env.setActiveProfiles("dev");
+		env.addActiveProfile("web");
+		env.addActiveProfile("dev");
 	}
 	
 }

@@ -2,15 +2,16 @@ package me.guymer.spring.config;
 
 import javax.sql.DataSource;
 
+import me.guymer.spring.config.profile.Dev;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
+@Dev
 @Configuration
-@Profile("dev")
 @PropertySource("classpath:properties/database.dev.properties")
 public class DataSourceConfigDev implements DataSourceConfig {
 	

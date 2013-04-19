@@ -10,11 +10,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.jpa.JpaDialect;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 
-/*
+/**
  * Registering a PersistenceExceptionTranslationPostProcessor bean does not convert exceptions when using AspectJ
- * 
+ *
  * http://alexandros-karypidis.blogspot.com.au/2011/06/spring-exception-translation-with.html
- * https://jira.springsource.org/browse/ROO-182?focusedCommentId=47196&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-47196
+ * https://jira.springsource.org/browse/ROO-182?focusedCommentId=47196#comment-47196
  */
 @Aspect
 @Configurable

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import me.guymer.spring.config.profile.Web;
 import me.guymer.spring.web.ext.ExtJsonReturnValueHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+@Web
 @Configuration
 public class WebConfig extends WebMvcConfigurationSupport {
 	
