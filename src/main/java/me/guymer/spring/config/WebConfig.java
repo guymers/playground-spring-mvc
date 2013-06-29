@@ -102,9 +102,18 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		final InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
 		internalResourceViewResolver.setPrefix("/WEB-INF/views/");
 		internalResourceViewResolver.setSuffix(".jsp");
+		internalResourceViewResolver.setOrder(2);
 		
 		return internalResourceViewResolver;
 	}
+	
+	// Provides internationalization of messages
+/*@Bean
+public ResourceBundleMessageSource messageSource() {
+ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+source.setBasename("messages");
+return source;
+}*/
 	
 	// seems to be required for @ControllerAdvice to work
 	/*@Bean
