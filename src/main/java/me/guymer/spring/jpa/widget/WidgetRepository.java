@@ -7,12 +7,15 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import me.guymer.spring.config.profile.Jpa;
 import me.guymer.spring.jpa.persistence.AbstractRepository;
+import me.guymer.spring.widget.Widget;
 
 import org.springframework.stereotype.Repository;
 
+@Jpa
 @Repository
-public class WidgetRepository extends AbstractRepository<Widget> {
+class WidgetRepository extends AbstractRepository<Widget> {
 	
 	public WidgetRepository() {
 		super(Widget.class);

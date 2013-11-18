@@ -4,6 +4,9 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import me.guymer.spring.jpa.widget.JpaWidgetService;
+import me.guymer.spring.widget.Widget;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +31,7 @@ public class WidgetTest {
 	static class ContextConfiguration {}
 	
 	@Inject
-	private WidgetService widgetService;
+	private JpaWidgetService widgetService;
 	
 	@Test(expected = MyBatisSystemException.class)
 	public void testSqlError() {

@@ -46,10 +46,9 @@ public abstract class AbstractRepository<T extends Serializable> {
 	}
 	
 	public void delete(final T entity) {
-		// got to merge so we have an entity in the current persistence context
-		final T newEntity = entityManager.merge(entity);
+		final T managedEntity = entityManager.contains(entity) ? entity : entityManager.merge(entity);
 		
-		entityManager.remove(newEntity);
+		entityManager.remove(managedEntity);
 	}
 	
 }

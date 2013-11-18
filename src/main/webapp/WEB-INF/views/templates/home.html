@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head>
+		<title>Home - Thymeleaf</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+		<h1>Home</h1>
+		
+		<p th:text="#{intro}">Intro</p>
+		
+		<a href="?locale=en_GB">en_GB</a><br/>
+		<a href="?locale=en_US">en_US</a><br/>
+		<a href="widget.html" th:href="@{/widgets/index}">Widgets</a>
+		
+		<br/>
+		<br/>
+		<a th:href="@{/jsp}">JSP</a>
+	</body>
+</html>

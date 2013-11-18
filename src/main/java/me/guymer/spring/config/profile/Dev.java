@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Profile;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Profile("dev")
+@Profile(Profiles.DEV)
 public @interface Dev {}

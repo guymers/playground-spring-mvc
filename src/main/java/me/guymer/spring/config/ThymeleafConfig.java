@@ -20,9 +20,8 @@ public class ThymeleafConfig {
 	public ServletContextTemplateResolver templateResolver() {
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
 		templateResolver.setTemplateMode("HTML5");
-		templateResolver.setPrefix("/WEB-INF/templates/");
+		templateResolver.setPrefix("/WEB-INF/views/");
 		templateResolver.setSuffix(".html");
-		templateResolver.setOrder(1);
 		
 		return templateResolver;
 	}
@@ -33,9 +32,9 @@ public class ThymeleafConfig {
 		templateEngine.setTemplateResolver(templateResolver());
 		
 		Set<IDialect> additionalDialects = new HashSet<IDialect>();
-		//additionalDialects.add(new org.thymeleaf.extras.tiles2.dialect.TilesDialect)
-		//additionalDialects.add(new org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect)
-		//additionalDialects.add(new org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect)
+		// additionalDialects.add(new org.thymeleaf.extras.tiles2.dialect.TilesDialect)
+		// additionalDialects.add(new org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect)
+		// additionalDialects.add(new org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect)
 		templateEngine.setAdditionalDialects(additionalDialects);
 		
 		return templateEngine;
@@ -45,6 +44,8 @@ public class ThymeleafConfig {
 	public ThymeleafViewResolver thymeleafViewResolver() {
 		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
 		resolver.setTemplateEngine(templateEngine());
+		resolver.setViewNames(new String[]{"templates/*"});
+		resolver.setOrder(1);
 		
 		return resolver;
 	}

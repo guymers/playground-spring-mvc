@@ -2,9 +2,11 @@ package me.guymer.spring.mybatis.widget;
 
 import java.util.List;
 
+import me.guymer.spring.widget.Widget;
+
 import org.apache.ibatis.annotations.Param;
 
-public interface WidgetMapper {
+interface WidgetMapper {
 	
 	List<Widget> getAll();
 	
@@ -15,5 +17,5 @@ public interface WidgetMapper {
 	void update(Widget widget);
 	
 	void delete(Widget widget);
-
+	
 }

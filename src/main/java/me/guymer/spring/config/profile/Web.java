@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Profile;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Profile("web")
+@Profile(Profiles.WEB)
 public @interface Web {}

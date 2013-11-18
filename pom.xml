@@ -17,10 +17,11 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<java.version>1.7</java.version>
-		<aspectj.version>1.7.2</aspectj.version>
-		<spring.version>3.2.3.RELEASE</spring.version>
+		<aspectj.version>1.7.3</aspectj.version>
+		<spring.version>3.2.5.RELEASE</spring.version>
 		<slf4j.version>1.7.5</slf4j.version>
-		<thymeleaf.version>2.0.16</thymeleaf.version>
+		<log4j.version>2.0-beta9</log4j.version>
+		<thymeleaf.version>2.1.1.RELEASE</thymeleaf.version>
 	</properties>
 	
 	<dependencies>
@@ -85,51 +86,53 @@
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.2.9</version>
+			<version>2.3.1</version>
+			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
-			<groupId>postgresql</groupId>
+			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.1-901.jdbc4</version>
+			<version>9.3-1100-jdbc41</version>
+			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.jolbox</groupId>
 			<artifactId>bonecp</artifactId>
-			<version>0.7.1.RELEASE</version>
+			<version>0.8.0.RELEASE</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.2.2</version>
+			<version>3.2.3</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.1</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.0.Final</version>
+			<version>4.2.7.Final</version>
 		</dependency>
 		
 		<!-- JSON -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.1.4</version>
+			<version>2.3.0</version>
 		</dependency>
 		
 		<!-- Other -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>0.11.6</version>
+			<version>1.12.2</version>
 			<scope>provided</scope>
 		</dependency>
 		
@@ -155,34 +158,23 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -247,7 +239,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>3.1</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -265,9 +257,9 @@
 			</plugin>
 			
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
+				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>8.1.10.v20130312</version>
+				<version>9.0.7.v20131107</version>
 				<configuration>
 					<!--scanIntervalSeconds>5</scanIntervalSeconds-->
 					<stopKey>exit</stopKey>
@@ -279,7 +271,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.3</version>
+				<version>2.4</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
@@ -289,10 +281,11 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.4</version>
+				<version>1.5</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<complianceLevel>1.7</complianceLevel>
 					<outxml>true</outxml>
 					<forceAjcCompile>true</forceAjcCompile>
 					<sources/>
@@ -367,19 +360,19 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.6</version>
+				<version>2.7</version>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.2</version>
+				<version>2.6</version>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.9.1</version>
+				<version>2.11</version>
 				<!-- dont generate checkstyle-aggregate as it has double each error -->
 				<reportSets>
 					<reportSet>
