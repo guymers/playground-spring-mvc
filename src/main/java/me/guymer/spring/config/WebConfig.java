@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
-import org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
@@ -49,20 +48,17 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	}
 	
 	/**
-	 * ExtJsonReturnValueHandler uses the default RequestResponseBodyMethodProcessor so the
-	 * RequestMappingHandlerAdapter must be
-	 * created first so then the RequestResponseBodyMethodProcessor can be extracted. The
-	 * ExtJsonReturnValueHandler handler will
+	 * ExtJsonReturnValueHandler uses the default RequestResponseBodyMethodProcessor so the RequestMappingHandlerAdapter must be
+	 * created first so then the RequestResponseBodyMethodProcessor can be extracted. The ExtJsonReturnValueHandler handler will
 	 * not be tried if it is last element of the array so it is added to the start.
 	 */
 	private void addExtJsonReturnValueHandler() {
 		RequestMappingHandlerAdapter requestMappingHandlerAdapter = requestMappingHandlerAdapter();
-		HandlerMethodReturnValueHandlerComposite returnValueHandlers = requestMappingHandlerAdapter.getReturnValueHandlers();
-		RequestResponseBodyMethodProcessor responseBodyProcessor = getRequestResponseBodyMethodProcessor(returnValueHandlers);
+		List<HandlerMethodReturnValueHandler> handlers = requestMappingHandlerAdapter.getReturnValueHandlers();
+		RequestResponseBodyMethodProcessor responseBodyProcessor = getRequestResponseBodyMethodProcessor(handlers);
 		
 		ExtJsonReturnValueHandler extJsonHandler = new ExtJsonReturnValueHandler(responseBodyProcessor);
 		
-		List<HandlerMethodReturnValueHandler> handlers = returnValueHandlers.getHandlers();
 		// handlers is immutable
 		List<HandlerMethodReturnValueHandler> newHandlers = new ArrayList<HandlerMethodReturnValueHandler>(handlers);
 		newHandlers.add(0, extJsonHandler);
@@ -70,9 +66,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		requestMappingHandlerAdapter.setReturnValueHandlers(newHandlers);
 	}
 	
-	private RequestResponseBodyMethodProcessor getRequestResponseBodyMethodProcessor(HandlerMethodReturnValueHandlerComposite returnValueHandlers) {
-		List<HandlerMethodReturnValueHandler> handlers = returnValueHandlers.getHandlers();
-		
+	private RequestResponseBodyMethodProcessor getRequestResponseBodyMethodProcessor(List<HandlerMethodReturnValueHandler> handlers) {
 		RequestResponseBodyMethodProcessor responseBodyProcessor = null;
 		
 		for (HandlerMethodReturnValueHandler handler : handlers) {
