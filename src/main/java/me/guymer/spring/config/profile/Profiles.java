@@ -8,4 +8,6 @@ public final class Profiles {
 	public static final String JPA = "jpa";
 	public static final String MYBATIS = "mybatis";
 
+	private Profiles() {}
+
 }

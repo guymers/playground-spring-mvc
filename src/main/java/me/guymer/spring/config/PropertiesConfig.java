@@ -16,4 +16,6 @@ public class PropertiesConfig {
 
 		return propertySourcesPlaceholderConfigurer;
 	}
+
+	private PropertiesConfig() {}
 }

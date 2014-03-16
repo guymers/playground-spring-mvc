@@ -4,17 +4,17 @@ import java.util.List;
 
 public interface WidgetService {
 
-	public List<Widget> get();
+	List<Widget> get();
 
-	public Widget get(int id);
+	Widget get(int id);
 
-	public Widget get(Widget widget);
+	Widget get(Widget widget);
 
-	public void create(Widget widget);
+	void create(Widget widget);
 
-	public void update(Widget widget);
+	void update(Widget widget);
 
-	public void delete(Widget widget);
+	void delete(Widget widget);
 
-	public void createOrUpdate(Widget widget);
+	void createOrUpdate(Widget widget);
 }
