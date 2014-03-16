@@ -14,7 +14,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @Test
 @PropertySource("classpath:properties/database.test.properties")
 public class DataSourceConfigTest implements DataSourceConfig {
-	
+
 	@Bean
 	@Override
 	public DataSource dataSource() {
@@ -22,7 +22,7 @@ public class DataSourceConfigTest implements DataSourceConfig {
 		embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.HSQL);
 		embeddedDatabaseBuilder.addScript("classpath:sql/schema.sql");
 		embeddedDatabaseBuilder.addScript("classpath:sql/data.sql");
-		
+
 		return embeddedDatabaseBuilder.build();
 	}
 }

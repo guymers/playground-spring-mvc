@@ -15,19 +15,19 @@ import com.jolbox.bonecp.BoneCPDataSource;
 @Configuration
 @PropertySource("classpath:properties/database.prod.properties")
 public class DataSourceConfigProd implements DataSourceConfig {
-	
+
 	@Value("${database.driver}")
 	private String driver;
-	
+
 	@Value("${database.url}")
 	private String url;
-	
+
 	@Value("${database.username}")
 	private String username;
-	
+
 	@Value("${database.password}")
 	private String password;
-	
+
 	@Bean
 	@Override
 	public DataSource dataSource() {
@@ -36,8 +36,7 @@ public class DataSourceConfigProd implements DataSourceConfig {
 		dataSource.setJdbcUrl(url);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
-		
+
 		return dataSource;
 	}
-	
 }

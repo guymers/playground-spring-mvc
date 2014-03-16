@@ -8,10 +8,10 @@
 	<module name="FileLength">
 		<property name="max" value="1000"/>
 	</module>
-	
+
 	<module name="TreeWalker">
 		<property name="tabWidth" value="4"/>
-		
+
 		<!-- Block Checks -->
 		<module name="EmptyBlock"/>
 		<module name="LeftCurly">
@@ -20,7 +20,7 @@
 		<module name="NeedBraces"/>
 		<module name="RightCurly"/>
 		<module name="AvoidNestedBlocks"/>
-		
+
 		<!-- Class Design -->
 		<!--module name="FinalClass"/-->
 		<module name="InterfaceIsType"/>
@@ -28,7 +28,7 @@
 		<!--module name="DesignForExtension"/-->
 		<module name="ThrowsCount"/>
 		<module name="InnerTypeLast"/>
-		
+
 		<!-- Coding -->
 		<module name="CovariantEquals"/>
 		<module name="EmptyStatement"/>
@@ -77,13 +77,13 @@
 		<module name="MultipleVariableDeclarations"/>
 		<module name="UnnecessaryParentheses"/>
 		<module name="OneStatementPerLine"/>
-		
+
 		<!--  Imports -->
 		<module name="AvoidStarImport"/>
 		<module name="IllegalImport"/>
 		<module name="RedundantImport"/>
 		<module name="UnusedImports"/>
-		
+
 		<!-- Metrics -->
 		<module name="BooleanExpressionComplexity"/>
 		<module name="ClassDataAbstractionCoupling">
@@ -99,18 +99,18 @@
 			<property name="max" value="200"/>
 		</module>
 		<module name="JavaNCSS"/>
-		
+
 		<!-- Miscellaneous -->
 		<module name="UpperEll"/>
 		<module name="ArrayTypeStyle"/>
 		<!--module name="FinalParameters"/-->
 		<module name="TrailingComment"/>
 		<module name="OuterTypeFilename"/>
-		
+
 		<!-- Modifiers -->
 		<module name="ModifierOrder"/>
 		<module name="RedundantModifier"/>
-		
+
 		<!-- Naming Conventions -->
 		<module name="AbstractClassName"/>
 		<module name="ClassTypeParameterName"/>
@@ -123,7 +123,7 @@
 		<module name="ParameterName"/>
 		<module name="StaticVariableName"/>
 		<module name="TypeName"/>
-		
+
 		<!-- Size Violations -->
 		<module name="LineLength">
 			<property name="max" value="150"/>
@@ -133,7 +133,7 @@
 		<module name="ParameterNumber">
 			<property name="max" value="5"/>
 		</module>
-		
+
 		<!-- Whitespace -->
 		<module name="GenericWhitespace"/>
 		<module name="EmptyForInitializerPad"/>
@@ -150,7 +150,7 @@
 			<property name="allowEmptyMethods" value="true"/>
 			<property name="ignoreEnhancedForColon" value="false"/>
 		</module>
-		
+
 		<!-- http://blogger.ziesemer.com/2011/04/checkstyle.html -->
 		<module name="RegexpSinglelineJava">
 			<metadata name="net.sf.eclipsecs.core.comment" value="MAZ"/>
@@ -159,12 +159,11 @@
 			<property name="ignoreComments" value="true"/>
 		</module>
 	</module>
-	
+
 	<!-- http://blogger.ziesemer.com/2011/04/checkstyle.html -->
 	<module name="RegexpSingleline">
 		<metadata name="net.sf.eclipsecs.core.comment" value="MAZ"/>
 		<property name="format" value="[^\s]+\s+$"/>
 		<property name="message" value="Line has trailing whitespace."/>
 	</module>
-	
 </module>

@@ -16,24 +16,23 @@ import org.springframework.stereotype.Repository;
 @Jpa
 @Repository
 class WidgetRepository extends AbstractRepository<Widget> {
-	
+
 	public WidgetRepository() {
 		super(Widget.class);
 	}
-	
+
 	@Override
 	public List<Widget> getAll() {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Widget> criteriaQuery = criteriaBuilder.createQuery(Widget.class);
-		
+
 		Root<Widget> widget = criteriaQuery.from(Widget.class);
-		
+
 		criteriaQuery.select(widget);
 		criteriaQuery.where(criteriaBuilder.isTrue(widget.<Boolean>get("active")));
-		
+
 		TypedQuery<Widget> query = entityManager.createQuery(criteriaQuery);
-		
+
 		return query.getResultList();
 	}
-	
 }

@@ -21,39 +21,38 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @MapperScan("me.guymer.spring.mybatis")
 public class PersistenceMyBatisConfig {
-	
+
 	@Value("${config.schema}")
 	private String schema;
-	
+
 	@Value("${mybatis.domainPackageToScan}")
 	private String mybatisDomainPackageToScan;
-	
+
 	@Value("${mybatis.configFileLocation}")
 	private String mybatisConfigFileLocation;
-	
+
 	@Inject
 	private DataSource dataSource;
-	
+
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactoryBean() {
 		final SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
 		sqlSessionFactoryBean.setTypeAliasesPackage(mybatisDomainPackageToScan);
-		
+
 		final Resource configLocation = new ClassPathResource(mybatisConfigFileLocation);
 		sqlSessionFactoryBean.setConfigLocation(configLocation);
-		
+
 		final Properties configurationProperties = new Properties();
 		configurationProperties.setProperty("schema", schema);
-		
+
 		sqlSessionFactoryBean.setConfigurationProperties(configurationProperties);
-		
+
 		return sqlSessionFactoryBean;
 	}
-	
+
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource);
 	}
-	
 }

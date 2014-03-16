@@ -18,24 +18,23 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Web
 @Component
 public class CustomMappingJackonObjectMapper {
-	
+
 	@Inject
 	private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
-	
+
 	@Inject
 	private CustomObjectMapper objectMapper;
-	
+
 	@PostConstruct
 	public void init() {
 		List<HttpMessageConverter<?>> messageConverters = requestMappingHandlerAdapter.getMessageConverters();
-		
+
 		for (HttpMessageConverter<?> messageConverter : messageConverters) {
 			if (messageConverter instanceof MappingJackson2HttpMessageConverter) {
 				MappingJackson2HttpMessageConverter converter = (MappingJackson2HttpMessageConverter) messageConverter;
-				
+
 				converter.setObjectMapper(objectMapper);
 			}
 		}
 	}
-	
 }

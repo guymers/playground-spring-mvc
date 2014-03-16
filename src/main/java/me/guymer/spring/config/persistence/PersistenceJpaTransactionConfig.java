@@ -13,16 +13,15 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Jpa
 @Configuration
 public class PersistenceJpaTransactionConfig {
-	
+
 	@Inject
 	private EntityManagerFactory entityManagerFactory;
-	
+
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		final JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory);
-		
+
 		return transactionManager;
 	}
-	
 }

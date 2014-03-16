@@ -10,20 +10,19 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
 public class CookieFallbackLocaleResolver extends CookieLocaleResolver {
-	
+
 	private static Logger LOGGER = LoggerFactory.getLogger(CookieFallbackLocaleResolver.class);
-	
+
 	private LocaleResolver fallbackLocaleResolver;
-	
+
 	public void setFallbackLocaleResolver(LocaleResolver fallbackLocaleResolver) {
 		this.fallbackLocaleResolver = fallbackLocaleResolver;
 	}
-	
+
 	@Override
 	protected Locale determineDefaultLocale(HttpServletRequest request) {
 		LOGGER.debug("Falling back to fallback resolver");
-		
+
 		return fallbackLocaleResolver.resolveLocale(request);
 	}
-	
 }

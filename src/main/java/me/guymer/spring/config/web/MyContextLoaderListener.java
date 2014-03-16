@@ -10,20 +10,19 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 
 public class MyContextLoaderListener extends ContextLoaderListener {
-	
+
 	public MyContextLoaderListener(WebApplicationContext context) {
 		super(context);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	protected List<Class<ApplicationContextInitializer<ConfigurableApplicationContext>>> determineContextInitializerClasses(ServletContext servletContext) {
 		List<Class<ApplicationContextInitializer<ConfigurableApplicationContext>>> classes = super.determineContextInitializerClasses(servletContext);
-		
+
 		Class<?> clazz = MyApplicationContextInitializer.class;
 		classes.add((Class<ApplicationContextInitializer<ConfigurableApplicationContext>>)clazz);
-		
+
 		return classes;
 	}
-	
 }

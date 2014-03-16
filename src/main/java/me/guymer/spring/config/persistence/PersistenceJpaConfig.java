@@ -20,21 +20,21 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 @Jpa
 @Configuration
 public class PersistenceJpaConfig {
-	
+
 	private static final String HIBERNATE_DIALECT = "hibernate.dialect";
-	
+
 	@Value("${jpa.domainPackageToScan}")
 	private String jpaDomainPackageToScan;
-	
+
 	@Value("${jpa.propertiesFileLocation}")
 	private String propertiesFileLocation;
-	
+
 	@Value("${" + HIBERNATE_DIALECT + "}")
 	private String hibernateDialect;
-	
+
 	@Inject
 	private DataSource dataSource;
-	
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws IOException {
 		final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -42,24 +42,23 @@ public class PersistenceJpaConfig {
 		entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
 		entityManagerFactoryBean.setPackagesToScan(jpaDomainPackageToScan);
 		entityManagerFactoryBean.setJpaProperties(jpaProperties());
-		
+
 		return entityManagerFactoryBean;
 	}
-	
+
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
 		return new HibernateJpaVendorAdapter();
 	}
-	
+
 	private Properties jpaProperties() throws IOException {
 		final Resource location = new ClassPathResource(propertiesFileLocation);
-		
+
 		final Properties jpaProperties = new Properties();
 		jpaProperties.load(location.getInputStream());
-		
+
 		jpaProperties.setProperty(HIBERNATE_DIALECT, hibernateDialect);
-		
+
 		return jpaProperties;
 	}
-	
 }

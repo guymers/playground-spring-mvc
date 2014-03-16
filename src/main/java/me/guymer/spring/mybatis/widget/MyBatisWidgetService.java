@@ -14,45 +14,45 @@ import org.springframework.transaction.annotation.Transactional;
 @MyBatis
 @Service
 public class MyBatisWidgetService implements WidgetService {
-	
+
 	@Inject
 	private WidgetMapper widgetMapper;
-	
+
 	@Override
 	public List<Widget> get() {
 		return widgetMapper.getAll();
 	}
-	
+
 	@Override
 	public Widget get(int id) {
 		return widgetMapper.get(id);
 	}
-	
+
 	@Override
 	public Widget get(Widget widget) {
 		int id = widget.getId();
-		
+
 		return get(id);
 	}
-	
+
 	@Override
 	@Transactional
 	public void create(Widget widget) {
 		widgetMapper.create(widget);
 	}
-	
+
 	@Override
 	@Transactional
 	public void update(Widget widget) {
 		widgetMapper.update(widget);
 	}
-	
+
 	@Override
 	@Transactional
 	public void delete(Widget widget) {
 		widgetMapper.delete(widget);
 	}
-	
+
 	@Override
 	@Transactional
 	public void createOrUpdate(Widget widget) {
@@ -62,5 +62,4 @@ public class MyBatisWidgetService implements WidgetService {
 			create(widget);
 		}
 	}
-	
 }
