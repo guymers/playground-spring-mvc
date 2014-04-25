@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import com.jolbox.bonecp.BoneCPDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Prod
 @Configuration
@@ -31,12 +32,13 @@ public class DataSourceConfigProd implements DataSourceConfig {
 	@Bean
 	@Override
 	public DataSource dataSource() {
-		final BoneCPDataSource dataSource = new BoneCPDataSource();
-		dataSource.setDriverClass(driver);
-		dataSource.setJdbcUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		HikariConfig config = new HikariConfig();
+		config.setMaximumPoolSize(100);
+		config.setDataSourceClassName(driver);
+		config.addDataSourceProperty("url", url);
+		config.addDataSourceProperty("user", username);
+		config.addDataSourceProperty("password", password);
 
-		return dataSource;
+		return new HikariDataSource(config);
 	}
 }
