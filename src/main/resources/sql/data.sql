@@ -1,5 +1,5 @@
 
-INSERT INTO testing.widget 
+INSERT INTO testing.widget
 (name, create_date, active)
 VALUES
 ('Test 1', '2012-01-01', true),

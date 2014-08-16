@@ -4,35 +4,31 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import me.guymer.spring.config.Config;
+import me.guymer.spring.config.profile.Profiles;
 import me.guymer.spring.widget.Widget;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
-@ActiveProfiles("test")
+@ContextConfiguration(classes = Config.class, loader = AnnotationConfigContextLoader.class)
+@ActiveProfiles({Profiles.TEST, Profiles.JPA})
 @Transactional
-public class WidgetTest {
-
-	@Configuration
-	@ComponentScan(basePackages = "me.guymer.spring", excludeFilters = @ComponentScan.Filter({ComponentScan.class, EnableWebMvc.class}))
-	static class ContextConfiguration {}
+public class JpaWidgetTest {
 
 	@Inject
 	private JpaWidgetService widgetService;
 
-	@Test(expected = DataIntegrityViolationException.class)
+	//@Test(expected = DataIntegrityViolationException.class)
+	@Test(expected = JpaSystemException.class)
 	public void testSqlError() {
 		String nameToLong = "012345678901234567890123456789012345678901234567890";
 
@@ -54,14 +50,12 @@ public class WidgetTest {
 		widget.setActive(true);
 
 		widgetService.createOrUpdate(widget);
-
 		Assert.assertEquals(6, widgetService.get().size());
 	}
 
 	@Test
 	public void testCreateOrUpdateUpdate() {
 		Widget existing = widgetService.get(1);
-
 		Assert.assertEquals("Test 1", existing.getName());
 
 		existing.setName("blah");
@@ -69,7 +63,6 @@ public class WidgetTest {
 		widgetService.createOrUpdate(existing);
 
 		Widget existing2 = widgetService.get(1);
-
 		Assert.assertEquals("blah", existing2.getName());
 	}
 

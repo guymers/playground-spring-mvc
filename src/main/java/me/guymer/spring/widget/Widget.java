@@ -27,7 +27,7 @@ public class Widget implements Serializable {
 	@Column(name = "widget_id")
 	private int id;
 
-	@Column(name = "name")
+	@Column(name = "name", length = 50)
 	private String name;
 
 	@Column(name = "create_date")
