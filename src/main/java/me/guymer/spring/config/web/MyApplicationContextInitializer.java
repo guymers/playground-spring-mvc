@@ -13,7 +13,7 @@ public class MyApplicationContextInitializer implements ApplicationContextInitia
 		ConfigurableEnvironment env = context.getEnvironment();
 		env.addActiveProfile(Profiles.WEB);
 		env.addActiveProfile(Profiles.DEV);
-		env.addActiveProfile(Profiles.MYBATIS);
-		//env.addActiveProfile(Profiles.JPA);
+		//env.addActiveProfile(Profiles.MYBATIS);
+		env.addActiveProfile(Profiles.JPA);
 	}
 }
