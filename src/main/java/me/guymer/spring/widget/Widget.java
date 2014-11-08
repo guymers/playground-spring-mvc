@@ -1,7 +1,7 @@
 package me.guymer.spring.widget;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,20 +31,8 @@ public class Widget implements Serializable {
 	private String name;
 
 	@Column(name = "create_date")
-	private Date createDate;
+	private LocalDate createDate;
 
 	@Column(name = "active")
 	private boolean active;
-
-	public Date getCreateDate() {
-		if (createDate == null) {
-			return null;
-		}
-
-		return new Date(createDate.getTime());
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate == null ? null : new Date(createDate.getTime());
-	}
 }

@@ -1,6 +1,7 @@
 package me.guymer.spring.config.persistence;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 
 import javax.inject.Inject;
@@ -15,13 +16,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.orm.jpa.persistenceunit.PersistenceUnitPostProcessor;
+import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 
 @Jpa
 @Configuration
 public class PersistenceJpaConfig {
-
-	private static final String HIBERNATE_DIALECT = "hibernate.dialect";
 
 	@Value("${jpa.domainPackageToScan}")
 	private String jpaDomainPackageToScan;
@@ -29,11 +29,14 @@ public class PersistenceJpaConfig {
 	@Value("${jpa.propertiesFileLocation}")
 	private String propertiesFileLocation;
 
-	@Value("${" + HIBERNATE_DIALECT + "}")
-	private String hibernateDialect;
+	@Value("${jpa.databasePlatform}")
+	private String databasePlatform;
 
 	@Inject
 	private DataSource dataSource;
+
+	@Inject
+	private List<PersistenceUnitPostProcessor> postProcessors;
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() throws IOException {
@@ -42,13 +45,17 @@ public class PersistenceJpaConfig {
 		entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
 		entityManagerFactoryBean.setPackagesToScan(jpaDomainPackageToScan);
 		entityManagerFactoryBean.setJpaProperties(jpaProperties());
+		entityManagerFactoryBean.setPersistenceUnitPostProcessors(postProcessors.toArray(new PersistenceUnitPostProcessor[postProcessors.size()]));
 
 		return entityManagerFactoryBean;
 	}
 
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
-		return new HibernateJpaVendorAdapter();
+		final EclipseLinkJpaVendorAdapter adapter = new EclipseLinkJpaVendorAdapter();
+		adapter.setDatabasePlatform(databasePlatform);
+
+		return adapter;
 	}
 
 	private Properties jpaProperties() throws IOException {
@@ -56,8 +63,6 @@ public class PersistenceJpaConfig {
 
 		final Properties jpaProperties = new Properties();
 		jpaProperties.load(location.getInputStream());
-
-		jpaProperties.setProperty(HIBERNATE_DIALECT, hibernateDialect);
 
 		return jpaProperties;
 	}

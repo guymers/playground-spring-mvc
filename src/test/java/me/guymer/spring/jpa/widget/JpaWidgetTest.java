@@ -1,6 +1,6 @@
 package me.guymer.spring.jpa.widget;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.inject.Inject;
 
@@ -34,7 +34,7 @@ public class JpaWidgetTest {
 
 		Widget widget = new Widget();
 		widget.setName(nameToLong);
-		widget.setCreateDate(new Date());
+		widget.setCreateDate(LocalDate.now());
 		widget.setActive(true);
 
 		widgetService.create(widget);
@@ -46,7 +46,7 @@ public class JpaWidgetTest {
 
 		Widget widget = new Widget();
 		widget.setName("name");
-		widget.setCreateDate(new Date());
+		widget.setCreateDate(LocalDate.now());
 		widget.setActive(true);
 
 		widgetService.createOrUpdate(widget);

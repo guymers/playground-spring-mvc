@@ -1,6 +1,6 @@
 package me.guymer.spring.mybatis.widget;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.inject.Inject;
 
@@ -33,7 +33,7 @@ public class MyBatisWidgetTest {
 
 		Widget widget = new Widget();
 		widget.setName(nameToLong);
-		widget.setCreateDate(new Date());
+		widget.setCreateDate(LocalDate.now());
 		widget.setActive(true);
 
 		widgetService.create(widget);
@@ -45,7 +45,7 @@ public class MyBatisWidgetTest {
 
 		Widget widget = new Widget();
 		widget.setName("name");
-		widget.setCreateDate(new Date());
+		widget.setCreateDate(LocalDate.now());
 		widget.setActive(true);
 
 		widgetService.createOrUpdate(widget);
